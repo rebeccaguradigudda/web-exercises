@@ -9,10 +9,12 @@ if (Number(guess)===secretnumber){
     alert("You got it right");
 
 }
-
+//check if it is high
 else if (Number(guess)>secretnumber){
     alert("too high");
 }
+
+//check if it is low
 else {
     alert("too low");
 }

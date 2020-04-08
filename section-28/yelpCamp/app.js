@@ -82,7 +82,8 @@ app.post("/campgrounds", function(req,res){
     //get data from form and to campground
     var name=req.body.name;
     var image=req.body.image;
-    var newCampground = {name:name, image:image};
+    var desc = req.body.description;
+    var newCampground = {name:name, image:image, description : desc};
     //Create a new campgrouund and save to db
     Campground.create(newCampground,function(err,newlyCreated){
         if(err){
@@ -103,9 +104,17 @@ app.get("/campgrounds/new", function(req,res){
 
 //SHOW - shows more info about one campground
 app.get("/campgrounds/:id", function(req,res){
+
+
     //find the campground with provided id
-    //render show page with all the item
-    res.render("show");
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        }else{
+            //render show page with all the item
+            res.render("show", {campground: foundCampground});
+        }
+    });
 });
 
 
